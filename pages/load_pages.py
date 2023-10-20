@@ -40,14 +40,11 @@ class LoadPages(BasePage):
             element_by_test_id = self.page.get_by_test_id(values['by_test_id'])
             if element_by_test_id is None:
                 raise ValueError(f"无法通过 by_test_id='{values['by_test_id']}' 定位到元素")
-
             element_by_text = element_by_test_id.get_by_text(values['by_text'])
             if element_by_text is None:
                 raise ValueError(f"无法通过 by_text='{values['by_text']}' 定位到元素")
-
             return element_by_text
         except Exception as e:
-
             logger.error(f"组合定位元素失败，错误信息为：{e}")
             raise  # 重新抛出异常，以停止后续操作
 
