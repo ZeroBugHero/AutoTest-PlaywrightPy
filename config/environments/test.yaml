@@ -1,0 +1,14 @@
+base_url: https://www.baidu.com
+
+reports_path:
+  allure: report/allure-report
+  html: report/html-report
+  results: test-results
+
+
+log:
+  path: /Users/pizazz/Desktop/learn/code/web_ui/yangfan_web_ui/logs
+  filemode: w
+  encoding: utf-8
+  format: '%(asctime)s - %(levelname)s - %(message)s'
+  level: INFO

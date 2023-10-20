@@ -16,7 +16,7 @@ develop-eggs/
 dist/
 logs/
 report/
-test-result/
+test-results
 data/
 downloads/
 eggs/
