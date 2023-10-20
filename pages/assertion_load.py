@@ -6,19 +6,16 @@ from plugins.logger import logger  # 假设这里有一个名为logger的日志�
 from utils.custom_exception import ElementNotFoundError
 from utils.function_replacer import replace_functions
 
-assertion_type = Dict[str, List[Dict[str, Any]]]  # 定义assertion_type为一个嵌套字典
+AssertionType = Dict[str, List[Dict[str, Any]]]  # 定义assertion_type为一个嵌套字典
 
 
 class AssertionLoad:
     VALID_LOCATE_TYPES = ['xpath', 'placeholder', 'role', 'title', 'url']
 
-    def __init__(self, page: Page, elements: assertion_type):
+    def __init__(self, page: Page, elements: AssertionType):
         self.page = page
         self.assertions = elements.get('expect')
         if self.assertions is None:
-            print("--------------------------------")
-            print(self.assertions)
-            print("--------------------------------")
             logger.info("在元素中没有找到 'expect' 键，跳过断言。")
             return
 

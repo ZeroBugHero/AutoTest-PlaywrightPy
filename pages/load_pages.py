@@ -6,13 +6,13 @@ from playwright.sync_api import Browser, BrowserContext, Page, Playwright
 from pages.base_page import BasePage
 from plugins.logger import logger
 
-elements_type = Dict[str, List[Dict[str, str]]]
+ElementsType = Dict[str, List[Dict[str, str]]]
 
 
 class LoadPages(BasePage):
 
     def __init__(self, playwright: Playwright, browser: Browser, context: BrowserContext, page: Page, base_url: str,
-                 elements: elements_type):
+                 elements: ElementsType):
         """
             构造函数。
             参数:
@@ -35,7 +35,7 @@ class LoadPages(BasePage):
         self.page.goto(f'{self.base_url}{self.elements["url"]}') if "url" in self.elements else logger.warning(
             "没有指定的URL进行导航.")
 
-    def combo_locator(self, values: dict):
+    def combo_locator(self, values: Dict[str, Optional[str]]):
         try:
             element_by_test_id = self.page.get_by_test_id(values['by_test_id'])
             if element_by_test_id is None:
@@ -127,7 +127,7 @@ class LoadPages(BasePage):
             logger.error(f"通过正则表达式定位元素失败，错误信息为：{e}")
             raise  # 重新抛出异常，以停止后续操作
 
-    def locate_element(self, element: Dict[str, str]):
+    def locate_element(self, element: Dict[str, Optional[str]]):
         element_type = element.get('type', '')
         element_values = element.get('values', '')
 
