@@ -30,7 +30,7 @@ class LoadPages(BasePage):
         self.elements = elements
         self.cases = elements['elements']
         self.cases_type = elements['case']
-        if 1 == 1:
+        if 1 == 1: # todo 增加配置
             NetworkListener(self.page)
         logger.info(self.cases)
 
