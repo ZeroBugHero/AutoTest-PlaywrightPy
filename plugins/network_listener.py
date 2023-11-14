@@ -33,6 +33,7 @@ class NetworkListener:
         route.continue_()
 
     def _handle_response(self, response):
+        # todo 打印接口和返回值
         # 获取与响应关联的请求对象
         resource_type = response.request.resource_type
         ignored_types = {'image', 'stylesheet', 'script', 'font', "document"}

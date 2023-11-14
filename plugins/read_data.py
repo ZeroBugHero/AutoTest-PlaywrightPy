@@ -22,10 +22,9 @@ class ReadData:
 
         return data
 
-
-def get_user_info(self):
-    data = self.read_yaml()
-    return data.get('userinfo')
+    def get_user_info(self):
+        data = self.read_yaml()
+        return data.get('userinfo')
 
 
 readData = ReadData('data/data.yaml')

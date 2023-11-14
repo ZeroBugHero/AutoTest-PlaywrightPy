@@ -1,17 +1,18 @@
 import re
-from typing import Dict, List, Optional
 
+from typing import Dict, List, Optional
 from playwright.sync_api import Browser, BrowserContext, Page, Playwright
 
 from pages.base_page import BasePage
 from plugins.logger import logger
-
 from plugins.network_listener import NetworkListener
+from plugins.read_application import get_application_config
 
 ElementsType = Dict[str, List[Dict[str, str]]]
 
 
 class LoadPages(BasePage):
+    is_network_listen = get_application_config()['is_network_listen']
 
     def __init__(self, playwright: Playwright, browser: Browser, context: BrowserContext, page: Page, base_url: str,
                  elements: ElementsType):
@@ -30,7 +31,7 @@ class LoadPages(BasePage):
         self.elements = elements
         self.cases = elements['elements']
         self.cases_type = elements['case']
-        if 1 == 1: # todo 增加配置
+        if self.is_network_listen:
             NetworkListener(self.page)
         logger.info(self.cases)
 
@@ -38,7 +39,8 @@ class LoadPages(BasePage):
         # 使用三元运算符将基于URL的条件简化为一行，以提高可读性。
         self.page.goto(f'{self.base_url}{self.elements["url"]}') if "url" in self.elements else logger.warning(
             "没有指定的URL进行导航.")
-        self.page.wait_for_load_state("networkidle")  # 等待网络空闲
+        if self.is_network_listen:
+            self.page.wait_for_load_state("networkidle")  # 等待网络空闲
 
     def combo_locator(self, values: Dict[str, Optional[str]]):
         try:
