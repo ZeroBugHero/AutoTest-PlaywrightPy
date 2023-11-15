@@ -23,6 +23,28 @@ pip install -r requirements.txt
 * `plugins`：包含自定义的 pytest 插件。
 * `auth`：包含与用户认证相关的代码。
 * `config`：包含配置文件。
+* pytest.ini：pytest 配置文件。
+
+## pytest 配置
+
+pytest 配置文件位于 `pytest.ini` 文件中。它定义了测试报告的格式和输出目录。
+
+```ini
+[pytest]
+addopts = --tracing=retain-on-failure
+          --screenshot=only-on-failure
+          --video=retain-on-failure
+          --headed
+```
+
+#### 解释说明
+
+```
+tracing # 启用跟踪模式，    retain-on-failure 表示失败时保留跟踪
+screenshot # 启用截图模式， only-on-failure 表示只在失败时截图
+video # 启用视频模式，      retain-on-failure 表示失败时保留视频
+headed # 启动GUI显示模式，不配置则默认不显示
+```
 
 ## 运行测试
 
@@ -31,4 +53,5 @@ pip install -r requirements.txt
 ```bash
 python run_tests.py
 ```
+
 该脚本会检查浏览器客户端是否已安装。如果没有安装，它会尝试安装。然后，它运行测试用例并生成报告。

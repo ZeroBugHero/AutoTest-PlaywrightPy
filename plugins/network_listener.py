@@ -20,31 +20,34 @@ class NetworkListener:
         ignored_types = {'image', 'stylesheet', 'script', 'font'}
         if resource_type.lower() not in ignored_types:
             # 仅对非静态资源打印详细信息
-            logger.info(f"Intercepted request: {request.url}")
-            logger.info(f"Intercepted request method: {request.method}")
+            # logger.info(f"Intercepted request: {request.url}")
+            # logger.info(f"Intercepted request method: {request.method}")
             if request.method == "POST":
-                logger.info(f"Request post data: {request.post_data}")
+                pass
+                # logger.info(f"Request post data: {request.post_data}")
             else:
+                pass
                 # 解析请求的 URL 来获取参数
-                parsed_url = urlparse(request.url)
-                params = parse_qs(parsed_url.query)
-                logger.info(f"Request params: {params}")
+                # parsed_url = urlparse(request.url)
+                # params = parse_qs(parsed_url.query)
+                # logger.info(f"Request params: {params}")
 
         route.continue_()
 
     def _handle_response(self, response):
-        # todo 打印接口和返回值
         # 获取与响应关联的请求对象
         resource_type = response.request.resource_type
-        ignored_types = {'image', 'stylesheet', 'script', 'font', "document"}
+        ignored_types = {'image', 'stylesheet', 'script', 'font', "document", 'other', 'fetch'}
         if resource_type.lower() not in ignored_types:
-            # 仅对非静态资源打印详细信息
-            logger.info(f"Received response for: {response.url}")
-            logger.info(f"Response status: {response.status}")
+            # # 仅对非静态资源打印详细信息
+            # logger.info(f"Received response for: {response.url}")
+            # logger.info(f"Response status: {response.status}")
 
             try:
                 response_text = response.text()
-                logger.info(f"Response text: {response_text}")
+                logger.info(
+                    f"Request url: {response.request.url} , Request method: {response.request.method}, Response status:"
+                    f" {response.status} , Response text: {response_text}\n")
             except Exception as e:
                 logger.warning(f"Failed to fetch response text: {e}")
 
