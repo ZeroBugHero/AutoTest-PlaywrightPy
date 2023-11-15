@@ -9,6 +9,17 @@ blog地址: https://www.cnblogs.com/yoyoketang/tag/python%2Bplaywright/
 pytest_plugins = ['plugins.pytest_playwright', 'plugins.pytest_base_url']  # noqa
 
 
+def pytest_addoption(parser):
+    parser.addoption("--casepath", action="store")
+
+
+def pytest_generate_tests(metafunc):
+    if 'case_path' in metafunc.fixturenames:
+        case_path = metafunc.config.getoption('casepath')
+        if case_path:
+            metafunc.parametrize("case_path", [case_path])
+
+
 def pytest_runtest_call(item: Item):  # noqa
     # 动态添加测试类的 allure.feature()
     if item.parent._obj.__doc__:  # noqa
