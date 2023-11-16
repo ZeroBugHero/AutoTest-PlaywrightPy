@@ -2,7 +2,7 @@ import datetime
 import logging
 import os
 
-from plugins.read_application import get_application_config
+from plugins.read_application import get_application_config, get_project_path
 
 
 class Logger:
@@ -24,7 +24,7 @@ class Logger:
         log_config = get_application_config().get("log")
         log_dir = log_config.get("path")
         # 如果日志文件目录不存在，则创建它
-        os.makedirs(log_dir, exist_ok=True)
+        os.makedirs(f"{get_project_path()}/{log_dir}", exist_ok=True)
 
         # 设置日志格式和日期格式
         log_format = log_config.get("format")

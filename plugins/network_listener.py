@@ -47,7 +47,7 @@ class NetworkListener:
                 response_text = response.text()
                 logger.info(
                     f"Request url: {response.request.url} , Request method: {response.request.method}, Response status:"
-                    f" {response.status} , Response text: {response_text}\n")
+                    f" {response.status} , Response text: {response_text}")
             except Exception as e:
                 logger.warning(f"Failed to fetch response text: {e}")
 

@@ -39,3 +39,4 @@ def aa() -> None: ...
 if __name__ == '__main__':
     print(get_application_config())
     print(get_cases_path())
+    print(get_project_path())
