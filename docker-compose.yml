@@ -1,0 +1,32 @@
+version: '3.0'
+
+services:
+  playwright-app:
+    container_name: playwright-app
+    hostname: playwright-app
+    restart: always
+    volumes:
+      - /home/playwright-app/code/:/playwright-app/code
+    image: playwright-app:0.1
+
+  allure-app:
+    container_name: allure-app
+    volumes:
+      - /home/allure-app/reports/:/allure-app/reports
+    image: allure-app:0.1
+    hostname: allure-app
+    restart: always
+    ports:
+      - "5050:5050"
+    depends_on:
+      - playwright-app
+
+networks:
+  playwright-app-network:
+    driver: bridge
+
+
+volumes:
+  playwright-app-volume: {}
+  allure-app-volume: {}
+
